@@ -1,0 +1,11 @@
+version: "3"
+services:
+  arch-linux-vnc:
+    image: terwer/arch-linux-vnc:latest
+    container_name: arch-linux-vnc
+    build:
+      context: ./arch-linux-vnc
+      dockerfile: ./arch-linux-vnc/Dockerfile
+    ports:
+      - "5901:5901"
+    restart: always
