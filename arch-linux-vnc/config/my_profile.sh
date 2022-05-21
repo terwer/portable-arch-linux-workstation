@@ -13,4 +13,4 @@ alias la='ls -a'
 alias lla='ls -l -a'
 # echo "alias setup finished"
 
-echo "reset env"
+source /config/my_profile_auto.sh
