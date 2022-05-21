@@ -1,2 +1,10 @@
 # idea
 .idea
+
+# app
+app
+mytemp
+workspace
+
+# macOS
+.DS_Store

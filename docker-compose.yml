@@ -1,7 +1,6 @@
 version: "3"
 services:
   arch-linux-vnc:
-    tty: true
     image: terwer/arch-linux-vnc:latest
     container_name: arch-linux-vnc
     build:
@@ -9,4 +8,11 @@ services:
       dockerfile: Dockerfile
     ports:
       - "5901:5901"
-    restart: always
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./arch-linux-vnc/app:/app
+      - ./arch-linux-vnc/workspace:/workspace
+      - ./arch-linux-vnc/scripts:/scripts
+      - ./arch-linux-vnc/config:/config
+      - ./arch-linux-vnc/mytemp:/mytemp
