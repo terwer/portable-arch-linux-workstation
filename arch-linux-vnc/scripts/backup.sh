@@ -7,5 +7,5 @@
 rm -rf /mytemp/hometemp
 cp -r /home /mytemp/hometemp
 echo "backup home forder to /mytemp/hometemp/home ended"
-cp -r /root /mytemp/hometemp
-echo "backup root forder to /mytemp/hometemp/root ended"
+# cp -r /root /mytemp/hometemp
+# echo "backup root forder to /mytemp/hometemp/root ended"
