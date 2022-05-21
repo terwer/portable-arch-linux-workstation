@@ -34,3 +34,34 @@ enter.
 That's all.
 
 Enjory!
+
+# how to Recover apps and workstation
+
+copy apps to app forder, like
+
+```
+# macOS
+cp -r /Users/terwer/Documents/share/portable-linux-sync/app ./arch-linux-vnc
+
+# windows
+```
+
+copy workspace files to workspace forder, like
+
+```
+# macOS
+cp -r /Users/terwer/Documents/share/portable-linux-sync/workspace ./arch-linux-vnc
+
+# windows
+```
+
+then visit then via
+
+```
+/app
+/workspace
+```
+
+# how to set env
+
+change file `config/my_config.sh`, then RESTART project via `docker-compose up -d`,that's all.
