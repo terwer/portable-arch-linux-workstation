@@ -1,3 +1,3 @@
-# portable-arch-linux-8-workstation
+# portable-arch-linux-workstation
 
 portable workstation, everywhere, every system.
