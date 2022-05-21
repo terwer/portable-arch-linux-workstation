@@ -7,9 +7,8 @@
 
 # 更新最新vnc配置
 # =============================
-# xfce
-# password=>123456
-cp -r /config/vnc-xfce ~/.vnc
+# 设置vnc密码
+# vncpasswd
 # =============================
 
 # 启动VNCServer
