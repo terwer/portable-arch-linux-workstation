@@ -6,6 +6,7 @@
 app
 mytemp
 workspace
+data
 
 # macOS
 .DS_Store
