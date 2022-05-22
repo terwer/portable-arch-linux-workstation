@@ -78,8 +78,7 @@ RUN git clone https://gitee.com/mirrors/oh-my-zsh.git ~/.oh-my-zsh \
     && git clone https://gitee.com/playerfs/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting \
     && sed -i 's/^plugins=(/plugins=(zsh-autosuggestions zsh-syntax-highlighting /' ~/.zshrc
 # 添加自定义环境变量
-RUN echo "source ~/.my_profile" >> ~/.bashrc
-RUN echo "source ~/.my_profile" >> ~/.zshrc
+RUN echo "source /config/my_profile.sh" >> ~/.zshrc
 
 USER root
 # =================================

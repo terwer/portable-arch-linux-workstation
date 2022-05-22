@@ -1,11 +1,11 @@
 # idea
 .idea
+.java-version
 
 # app
 app
 mytemp
 workspace
-my_profile_auto.sh
 
 # macOS
 .DS_Store
