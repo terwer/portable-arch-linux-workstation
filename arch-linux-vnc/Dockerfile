@@ -94,6 +94,17 @@ RUN pacman -S firefox --noconfirm
 # =============================
 # 压缩软件、浏览器等
 RUN pacman -S zip unzip --noconfirm
+# 解决中文乱码问题
+RUN pacman -S wqy-microhei \
+    wqy-microhei-lite \
+    wqy-bitmapfont \
+    wqy-zenhei \
+    ttf-arphic-ukai \
+    ttf-arphic-uming \
+    adobe-source-han-sans-cn-fonts \
+    adobe-source-han-serif-cn-fonts \
+    noto-fonts-cjk --noconfirm \
+    && pacman -S firefox-i18n-zh-cn --noconfirm
 
 # =================================
 # 从这里开始操作不再拥有root权限
