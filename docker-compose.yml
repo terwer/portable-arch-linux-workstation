@@ -1,7 +1,7 @@
 version: "3"
 services:
   arch-linux-vnc:
-    image: terwer/arch-linux-vnc:latest
+    image: terwer/archlinux:latest
     container_name: arch-linux-vnc
     build:
       context: ./arch-linux-vnc
