@@ -30,7 +30,7 @@ ENV TZ CST-8
 # docker exec -it --user root portable-mysql57 /bin/bash
 # ifconfig
 # or
-# docker inspect portable-mysql57 | grep IPAddres
+# docker inspect portable-mysql57-arch | grep IPAddres
 
 # 替换配置文件
 COPY ./conf/my.cnf /etc/my.cnf
