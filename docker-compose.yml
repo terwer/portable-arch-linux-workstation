@@ -22,7 +22,7 @@ services:
     image: terwer/mysql57-arch:5.7.38
     container_name: portable-mysql57-arch
     build:
-     context: ./portable-mysql57
+     context: ./portable-mysql57-arch
      dockerfile: Dockerfile
     ports:
      - "3307:3307"
@@ -35,16 +35,16 @@ services:
      - "MYSQL_USER=terwer"
      - "MYSQL_PASSWORD=123456"
     volumes:
-     - ./portable-mysql57/data:/var/lib/mysql
-     - ./portable-mysql57/init:/docker-entrypoint-initdb.d/
-     - ./portable-mysql57/sql:/opt/
-     - ./portable-mysql57/mylog:/mylog/
+     - ./portable-mysql57-arch/data:/var/lib/mysql
+     - ./portable-mysql57-arch/init:/docker-entrypoint-initdb.d/
+     - ./portable-mysql57-arch/sql:/opt/
+     - ./portable-mysql57-arch/mylog:/mylog/
     restart: "no"
   portable-redis7:
     image: terwer/redis7-arch:7.0.0
     container_name: portable-redis7-arch
     build:
-     context: ./portable-redis
+     context: ./portable-redis-arch
      dockerfile: Dockerfile
     ports:
      - "6380:6380"
@@ -52,7 +52,7 @@ services:
      # 最好使用此设定时区，其它镜像也可以使用，也可以用"TZ=Asia/Shanghai"
      - "TZ=CST-8"
     volumes:
-      - ./portable-redis/conf:/myconf
+      - ./portable-redis-arch/conf:/myconf
     stdin_open: true
     tty: true
     restart: "no"
