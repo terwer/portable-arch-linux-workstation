@@ -16,3 +16,43 @@ services:
       - ./arch-linux-vnc/scripts:/scripts
       - ./arch-linux-vnc/config:/config
       - ./arch-linux-vnc/mytemp:/mytemp
+  portable-mysql57:
+    stdin_open: true
+    tty: true
+    image: terwer/mysql57-arch:5.7.38
+    container_name: portable-mysql57-arch
+    build:
+     context: ./portable-mysql57
+     dockerfile: Dockerfile
+    ports:
+     - "3307:3307"
+    environment:
+     # 最好使用此设定时区，其它镜像也可以使用，也可以用"TZ=Asia/Shanghai"
+     - "TZ=CST-8"
+     - "MYSQL_ROOT_PASSWORD=123456"
+     - "MYSQL_ROOT_HOST=%"
+     - "MYSQL_DATABASE=test"
+     - "MYSQL_USER=terwer"
+     - "MYSQL_PASSWORD=123456"
+    volumes:
+     - ./portable-mysql57/data:/var/lib/mysql
+     - ./portable-mysql57/init:/docker-entrypoint-initdb.d/
+     - ./portable-mysql57/sql:/opt/
+     - ./portable-mysql57/mylog:/mylog/
+    restart: "no"
+  portable-redis7:
+    image: terwer/redis7-arch:7.0.0
+    container_name: portable-redis7-arch
+    build:
+     context: ./portable-redis
+     dockerfile: Dockerfile
+    ports:
+     - "6380:6380"
+    environment:
+     # 最好使用此设定时区，其它镜像也可以使用，也可以用"TZ=Asia/Shanghai"
+     - "TZ=CST-8"
+    volumes:
+      - ./portable-redis/conf:/myconf
+    stdin_open: true
+    tty: true
+    restart: "no"
