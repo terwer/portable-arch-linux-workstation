@@ -19,6 +19,7 @@ USER root
 # 替换国内源
 # cat /etc/pacman.d/mirrorlist
 RUN echo 'Server = https://mirrors.163.com/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist \
+    && echo 'Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch' >> /etc/pacman.d/mirrorlist \
     && echo 'Server = https://repo.archlinuxcn.org/$arch' >> /etc/pacman.d/mirrorlist \
     && echo 'Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch' >> /etc/pacman.d/mirrorlist \
     && cat /etc/pacman.d/mirrorlist
@@ -103,8 +104,13 @@ RUN pacman -S wqy-microhei \
     ttf-arphic-uming \
     adobe-source-han-sans-cn-fonts \
     adobe-source-han-serif-cn-fonts \
-    noto-fonts-cjk --noconfirm \
-    && pacman -S firefox-i18n-zh-cn --noconfirm
+    noto-fonts-cjk --noconfirm
+# firefox乱码问题    
+RUN pacman -S firefox-i18n-zh-cn --noconfirm
+
+# 中文语言包
+# RUN pacman -S kde-l10n-zh_cn
+
 
 # =================================
 # 从这里开始操作不再拥有root权限
