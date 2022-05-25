@@ -2,6 +2,12 @@
 
 portable workstation, everywhere, every system.
 
+**!!!NODE!!! MySQL and redis are moved to alone projects.See:**
+
+[portable-mysql57](https://github.com/terwer/portable-mysql57)
+
+[portable-redis7](https://github.com/terwer/portable-redis7)
+
 # how to run
 
 ```bash
