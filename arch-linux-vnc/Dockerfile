@@ -89,18 +89,22 @@ USER root
 # intel显卡驱动安装，虚拟机不需要
 # RUN pacman -S xf86-video-intel --noconfirm
 # xorg是Linux下的一个著名的开源图形服务，桌面环境需要Xorg的支持
-# RUN pacman -S xorg --noconfirm   
+RUN pacman -S xorg --noconfirm   
 # 安装Xfce
 # xfce4-goodies介绍
 # https://www.jianshu.com/p/95c24f4d96e3
 RUN pacman -S xfce4 xfce4-goodies --noconfirm
-# 安装KDE(Plasma)、中文语言包
-# RUN pacman -S plasma kde-applications kde-l10n-zh_cn --noconfirm
-# 安装桌面管理器sddm，图形化的桌面管理器来帮助我们登录并且选择我们使用的桌面环境
-# RUN pacman -S sddm --noconfirm
+# 安装桌面管理器lightdm，图形化的桌面管理器来帮助我们登录并且选择我们使用的桌面环境
+RUN pacman -S lightdm --noconfirm
 
 # 安装浏览器
 RUN pacman -S firefox --noconfirm
+# 解决firefox乱码问题    
+RUN pacman -S firefox-i18n-zh-cn --noconfirm
+
+# visudo
+RUN echo "terwer ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
+RUN chown -R terwer:terwer /opt
 
 # =============================
 # 安装其他软件（一般小型软件）
@@ -109,23 +113,15 @@ RUN pacman -S firefox --noconfirm
 RUN pacman -S zip unzip --noconfirm
 
 # 安装字体
-RUN pacman -S wqy-zenhei --noconfirm
-# wqy-microhei \
+RUN pacman -S wqy-zenhei \
+wqy-microhei \
 # wqy-microhei-lite \
 # wqy-bitmapfont \
-# wqy-zenhei \
 # ttf-arphic-ukai \
 # ttf-arphic-uming \
 # adobe-source-han-sans-cn-fonts \
 # adobe-source-han-serif-cn-fonts \
-# noto-fonts-cjk --noconfirm
-
-# 解决firefox乱码问题    
-RUN pacman -S firefox-i18n-zh-cn --noconfirm
-
-# visudo
-RUN echo "terwer ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
-RUN chown -R terwer:terwer /opt
+noto-fonts-cjk --noconfirm
 
 # =================================
 # 从这里开始操作不再拥有root权限
