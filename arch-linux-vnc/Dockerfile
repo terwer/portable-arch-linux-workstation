@@ -18,7 +18,8 @@ USER root
 
 # 替换国内源
 # cat /etc/pacman.d/mirrorlist
-RUN echo 'Server = https://mirrors.163.com/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist \
+# echo 'Server = https://mirrors.163.com/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist \
+RUN echo 'Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch' >> /etc/pacman.d/mirrorlist \
     && echo 'Server = https://repo.archlinuxcn.org/$arch' >> /etc/pacman.d/mirrorlist \
     && echo 'Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch' >> /etc/pacman.d/mirrorlist \
     && cat /etc/pacman.d/mirrorlist
@@ -85,32 +86,59 @@ USER root
 # 安装大型软件包（桌面、vncserver等）
 # =================================
 # 安装xfce4桌面
-RUN pacman -S xfce4 --noconfirm
+# intel显卡驱动安装，虚拟机不需要
+# RUN pacman -S xf86-video-intel --noconfirm
+# xorg是Linux下的一个著名的开源图形服务，桌面环境需要Xorg的支持
+RUN pacman -S xorg --noconfirm   
+# 安装Xfce
+# xfce4-goodies介绍
+# https://www.jianshu.com/p/95c24f4d96e3
+RUN pacman -S xfce4 xfce4-goodies --noconfirm
+# 安装桌面管理器lightdm，图形化的桌面管理器来帮助我们登录并且选择我们使用的桌面环境
+RUN pacman -S lightdm --noconfirm
+
 # 安装浏览器
 RUN pacman -S firefox --noconfirm
+# 解决firefox乱码问题    
+RUN pacman -S firefox-i18n-zh-cn --noconfirm
+
+# visudo
+RUN echo "terwer ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
+RUN chown -R terwer:terwer /opt
 
 # =============================
 # 安装其他软件（一般小型软件）
 # =============================
-# 压缩软件、浏览器等
+# 安装压缩软件
 RUN pacman -S zip unzip --noconfirm
-# 解决中文乱码问题
-RUN pacman -S wqy-microhei \
-    wqy-microhei-lite \
-    wqy-bitmapfont \
-    wqy-zenhei \
-    ttf-arphic-ukai \
-    ttf-arphic-uming \
-    adobe-source-han-sans-cn-fonts \
-    adobe-source-han-serif-cn-fonts \
-    noto-fonts-cjk --noconfirm \
-    && pacman -S firefox-i18n-zh-cn --noconfirm
+
+# 安装字体
+RUN pacman -S wqy-zenhei \
+wqy-microhei \
+# wqy-microhei-lite \
+# wqy-bitmapfont \
+# ttf-arphic-ukai \
+# ttf-arphic-uming \
+# adobe-source-han-sans-cn-fonts \
+# adobe-source-han-serif-cn-fonts \
+noto-fonts-cjk --noconfirm
 
 # =================================
 # 从这里开始操作不再拥有root权限
 # =================================
 # 切回普通用户
 USER terwer
+
+# 安装AUR
+# RUN sudo pacman -S --needed git base-devel --noconfirm
+# RUN cd /opt && git clone https://aur.archlinux.org/yay-bin.git
+# RUN cd /opt/yay-bin 
+# RUN sudo chown terwer /opt/yay-bin
+# RUN sudo chmod 777 /opt/yay-bin
+# RUN makepkg -si --noconfirm
+
+# 解决终端乱码
+# RUN pacman -S zhcon --noconfirm
 
 # 启动入口
 COPY ./entrypoint.sh /entrypoint.sh
